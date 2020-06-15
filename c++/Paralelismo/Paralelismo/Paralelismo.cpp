@@ -8,14 +8,9 @@ int SUMA(int a,int b) {
 	return a+b;
 }
 
-int main()
-{
-	int i;
-
-	int* Matriz1,* Matriz2,* MatrizR;
-	Matriz1 = new int[5];
-	Matriz2 = new int[5];
-	MatrizR = new int[5];
+int main(){
+	int i,* Matriz1,* Matriz2,* MatrizR;
+	Matriz1 = new int[5];Matriz2 = new int[5];MatrizR = new int[5];
 	*(Matriz1 + 0) = 12;
 	*(Matriz1 + 1) = 41;
 	*(Matriz1 + 2) = 31;
@@ -34,18 +29,17 @@ int main()
 
 	cout << "SUMA SECUENCIAL\n\n";
 
-	for (int i = 0; *(Matriz1 + i);i++) {
-		cout <<SUMA(*(Matriz1 + i), *(Matriz2 + i))<< " ";
+	for (i = 0; *(Matriz1 + i);i++) {
+		cout <<SUMA(*(Matriz1 + i), *(Matriz2 + i))<< ", ";
 	}
 
 	cout << "\n\nSUMA EN PARALELO\n\n";
 
-	#pragma omp parallel for default(none) num_threads(4)// private(i,b) firstprivate(c) lastprivate(d) shared(m,a) schedule(static, 3) num_threads(4)
+	#pragma omp parallel for default(none) num_threads(4)
 	for (i = 0; i < 5; i++) {
 		*(MatrizR + i) = SUMA(*(Matriz1 + i),*(Matriz2 + i));
-		printf("Numero de Thread %d, Numero de iteraccion %d: Resultado = %d\n", omp_get_thread_num(), i, *(MatrizR + i));
+		printf("Numero de Thread %d, Numero de iteracion %d: Resultado = %d\n", omp_get_thread_num(), i, *(MatrizR + i));
 	}
 
-	getchar();
 	return 0;
 }
