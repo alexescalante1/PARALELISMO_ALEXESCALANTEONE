@@ -1,6 +1,7 @@
 #include <iostream>
 #include <omp.h>    ///habilitar OMP
 #include <stdio.h>
+#include <Windows.h>
 
 using namespace std;
 
@@ -37,9 +38,9 @@ int main(){
 
 	#pragma omp parallel for default(none) num_threads(4)
 	for (i = 0; i < 5; i++) {
-		*(MatrizR + i) = SUMA(*(Matriz1 + i),*(Matriz2 + i));
+		*(MatrizR + i) = SUMA(*(Matriz1 + i), *(Matriz2 + i));
 		printf("Numero de Thread %d, Numero de iteracion %d: Resultado = %d\n", omp_get_thread_num(), i, *(MatrizR + i));
 	}
-
+	
 	return 0;
 }
